@@ -4,7 +4,8 @@ import { PlacesStateInterface } from './state';
 
 const mutation: MutationTree<PlacesStateInterface> = {
     setLngLat(state: PlacesStateInterface, coords) {
-        state.userLocation = coords;
+        const {lng, lat} = coords;
+        state.userLocation = [lng, lat];
         state.isLoading = false;
     }
 }
