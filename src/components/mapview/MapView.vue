@@ -21,7 +21,7 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(86, 236, 249);
 }
 
 .loading-map{
