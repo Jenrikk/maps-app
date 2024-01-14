@@ -1,6 +1,6 @@
-import { usePlacesStore } from '@/composables';
 import { defineComponent, onMounted, ref, watch } from 'vue';
 import Mapboxgl from 'mapbox-gl';
+import { useMapStore, usePlacesStore } from '@/composables';
 
 
 export default defineComponent({
@@ -9,6 +9,8 @@ export default defineComponent({
         
         const mapElement = ref<HTMLDivElement>();
         const {userLocation, isUserLocationReady} = usePlacesStore()
+        const {setMap} = useMapStore()
+
 
         const initMap = async() => {
             if( !mapElement.value) throw new Error('Div element does not exist');
@@ -22,6 +24,21 @@ export default defineComponent({
                 center: userLocation.value, // starting position [lng, lat]
                 zoom: 14, // starting zoom
             });
+
+            const myLocationPopUp = new Mapboxgl.Popup()
+                .setLngLat(userLocation.value)
+                .setHTML(`
+                    <h4>Here I am</h4>
+                `)
+
+            const myLocationMarker = new Mapboxgl.Marker()
+                .setLngLat(userLocation.value)
+                .setPopup(myLocationPopUp)
+                .addTo(map);
+
+            //TODO: set map in vuex
+            setMap(map)
+
         }
 
         onMounted(() =>{

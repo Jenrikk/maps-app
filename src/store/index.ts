@@ -4,15 +4,20 @@ import { createStore } from 'vuex';
 import placesModule from './places';
 import { PlacesStateInterface } from './places/state';
 
+import mapModule from './map';
+import { MapStateInterface } from './map/state';
+
 
 
 export interface StateInterface {
-  places: PlacesStateInterface,
+  places: PlacesStateInterface;
+  map: MapStateInterface;
 }
 
 export default createStore<StateInterface>({
   modules: {
-    places: placesModule
+    places: placesModule,
+    map: mapModule
   }
   
 });
