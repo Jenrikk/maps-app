@@ -13,6 +13,10 @@ const actions: ActionTree<PlacesStateInterface, StateInterface> = {
                 throw new Error('No geolocation :(');
             },
         );
+    },
+    //TODO: set <return value>
+    async searchPlacesByTerm({commit, state}, query: string){
+        console.log('Vuex: ', query);
     }
 }
 
