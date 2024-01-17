@@ -22,10 +22,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import { useMapStore, usePlacesStore } from "@/composables";
 import { Feature } from "@/interfaces/places";
-import Mapboxgl, { LngLat, LngLatLike } from "mapbox-gl";
 
 export default defineComponent({
   name: "SearchResults",
@@ -35,7 +34,12 @@ export default defineComponent({
 
     const activePlace = ref('');
 
-    const {map} = useMapStore();
+    const {map, setPlacesMarkers} = useMapStore();
+
+    watch(places, (newPlaces) =>{
+      activePlace.value = '';
+      setPlacesMarkers(newPlaces)
+    })
 
 
     return {
