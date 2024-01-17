@@ -12,7 +12,8 @@
       <h5>{{ place.text }}</h5>
       <h6>{{ place.place_name }}</h6>
       <div align="right">
-        <button class="btn btn-outline-primary btn-sm" :class="(place.id === activePlace) ? 'btn-outline-light' : 'btn-outline-primary'">
+        <button class="btn btn-outline-primary btn-sm" 
+          :class="(place.id === activePlace) ? 'btn-outline-light' : 'btn-outline-primary'">
           Directions
         </button>
       </div>
@@ -22,15 +23,20 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { usePlacesStore } from "@/composables";
+import { useMapStore, usePlacesStore } from "@/composables";
 import { Feature } from "@/interfaces/places";
+import Mapboxgl, { LngLat, LngLatLike } from "mapbox-gl";
 
 export default defineComponent({
   name: "SearchResults",
   setup() {
 
     const {places, isLoadingPlaces} = usePlacesStore()
+
     const activePlace = ref('');
+
+    const {map} = useMapStore();
+
 
     return {
       places,
@@ -39,7 +45,14 @@ export default defineComponent({
 
       onPlaceClicked: (place: Feature) => {
         activePlace.value = place.id;
-      }
+        const [lng, lat] = place.center;
+
+        map.value?.flyTo({
+          center: [lng, lat],
+          zoom: 14,
+        });
+      },
+
     };
   },
 
