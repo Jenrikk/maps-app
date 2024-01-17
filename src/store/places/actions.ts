@@ -16,7 +16,7 @@ const actions: ActionTree<PlacesStateInterface, StateInterface> = {
             },
         );
     },
-    //TODO: set <return value>
+    
     async searchPlacesByTerm({commit, state}, query: string): Promise<Feature[]>{
         if(query.length === 0) {
             commit('setPlaces', [])
