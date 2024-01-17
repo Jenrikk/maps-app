@@ -1,5 +1,5 @@
 import { usePlacesStore } from '@/composables';
-import { computed, defineComponent, ref, watch } from 'vue';
+import { computed, defineComponent, ref} from 'vue';
 import SearchResults from '../search-results/SearchResults.vue'
 
 
