@@ -35,6 +35,66 @@ const mutation: MutationTree<MapStateInterface> = {
             
             state.markers.push(customMarker);
         }
+    },
+
+    setRoutePolyline(state, coords: number[][]){
+        const start = coords[0];
+        const end = coords[coords.length - 1];
+
+        // Define bounds:
+        const bounds = new Mapboxgl.LngLatBounds(
+            [start[0], start[1]],
+            [start[0], start[1]],
+        );
+        
+        // Add each point to the bounds
+        for(const coord of coords){
+            const newCoord: [number, number] = [coord[0], coord[1]];
+            bounds.extend(newCoord);
+        }
+        
+        // Set the instruction so the map can show all the points:
+        state.map?.fitBounds( bounds, {padding: 300} );
+
+        // draw the Polyline:
+        const sourceData: Mapboxgl.AnySourceData= {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: [
+                    {
+                        type: 'Feature',
+                        properties: {},
+                        geometry: {
+                            type: 'LineString',
+                            coordinates: coords
+                        }
+                    }
+                ]
+            }
+        };
+        
+        if(state.map?.getLayer('RouteString')){
+            state.map.removeLayer('RouteString');
+            state.map.removeSource('RoutePolyline');
+        }
+
+        state.map?.addSource('RoutePolyline', sourceData)
+
+        state.map?.addLayer({
+            id: 'RouteString',
+            type: 'line',
+            source: 'RoutePolyline',
+            layout: {
+                'line-cap': 'round',
+                'line-join': 'round'
+            },
+            paint: {
+                'line-color': 'black',
+                'line-width': 3
+            }
+        })
+
     }
 }
 
