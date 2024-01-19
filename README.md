@@ -1,4 +1,6 @@
 # maps-app
+![map-app](https://github.com/Jenrikk/maps-app/assets/25098916/fc447e81-5f1d-4112-bb91-889ffc04c800)
+
 
 ## Project setup
 ```
