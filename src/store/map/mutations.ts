@@ -90,8 +90,8 @@ const mutation: MutationTree<MapStateInterface> = {
                 'line-join': 'round'
             },
             paint: {
-                'line-color': 'black',
-                'line-width': 3
+                'line-color': 'hsl(203, 94%, 50%)',
+                'line-width': 4
             }
         })
 
@@ -103,7 +103,7 @@ const mutation: MutationTree<MapStateInterface> = {
         kms /= 100;
 
         state.distance = kms;
-        state.duration = duration; // is in minutes by default
+        state.duration = Math.round(duration/60); // is in seconds by default
     }
 }
 

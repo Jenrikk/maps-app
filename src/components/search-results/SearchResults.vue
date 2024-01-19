@@ -15,7 +15,7 @@
         <button class="btn btn-outline-primary " 
           :class="(place.id === activePlace) ? 'btn-outline-light' : 'btn-outline-primary'"
           @click.self="onPlaceDirections(place.center)">
-          <i class="bi bi-bicycle"></i>
+          Bike
         </button>
       </div>
     </li>
