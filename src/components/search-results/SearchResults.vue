@@ -12,10 +12,10 @@
       <h5>{{ place.text }}</h5>
       <h6>{{ place.place_name }}</h6>
       <div align="right">
-        <button class="btn btn-outline-primary btn-sm" 
+        <button class="btn btn-outline-primary " 
           :class="(place.id === activePlace) ? 'btn-outline-light' : 'btn-outline-primary'"
           @click.self="onPlaceDirections(place.center)">
-          Directions
+          <i class="bi bi-bicycle"></i>
         </button>
       </div>
     </li>

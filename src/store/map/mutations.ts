@@ -95,6 +95,15 @@ const mutation: MutationTree<MapStateInterface> = {
             }
         })
 
+    },
+
+    setDistanceDuration(state, {distance, duration}: {distance: number, duration: number}){
+        let kms = distance / 1000;
+        kms = Math.round(kms * 100);
+        kms /= 100;
+
+        state.distance = kms;
+        state.duration = duration; // is in minutes by default
     }
 }
 
